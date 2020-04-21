@@ -1,7 +1,7 @@
 import { IActionResult } from '@interfaces/action-result.interface';
 import { EActionStatus } from '@enums/action-status.enum';
-import { IViewModel } from '@interfaces/action-view-model.interface';
 import { QueryPaginated } from './action-paginated';
+import { ViewModel } from '@bases/action-view-model.interface';
 
 export class ActionResult implements IActionResult<any> {
     constructor(
@@ -33,7 +33,7 @@ export class MutationResult implements IActionResult<any> {
     }
 }
 
-export class QueryResult<TResult extends IViewModel | QueryPaginated<TResult>> implements IActionResult<TResult>  {
+export class QueryResult<TResult extends ViewModel<TResult> | QueryPaginated<TResult>> implements IActionResult<TResult>  {
     constructor(
         public data: TResult, 
         public status = EActionStatus.success,

@@ -5,6 +5,7 @@ import { Property } from "@decorators/property";
 import { Validators } from "@metadata/validators";
 import { EActionStatus } from "@enums/action-status.enum";
 import { User } from "@models/users/user";
+import { Bcrypt } from "@hashing/bcrypt";
 
 export class CreateUser extends Mutation {
     @Property([Validators.lenght({ length: 8 })])
@@ -29,26 +30,26 @@ export class CreateUser extends Mutation {
     public birth: Date;
 
     async consistent(): Promise<MutationResult> {
-        const existsName = !!await User.count({ where: { name: this.name } });
+        const existsName = !!await User.findOne({ where: { name: this.name } });
         if (existsName) return new MutationResult(EActionStatus.notAllowed, 'User with name already exists');
-        const existsEmail = !!await User.count({ where: { email: this.email } });
+        const existsEmail = !!await User.findOne({ where: { email: this.email } });
         if (existsEmail) return new MutationResult(EActionStatus.notAllowed, 'User with email already exists');
-        const existsLogin = !!await User.count({ where: { login: this.login } });
+        const existsLogin = !!await User.findOne({ where: { login: this.login } });
         if (existsLogin) return new MutationResult(EActionStatus.notAllowed, 'User with login already exists');
         return new MutationResult(EActionStatus.success);
     }
     async execute(context: ActionContext): Promise<MutationResult> {
-        var user = new User({ 
+        const user = new User({ 
             id: this.id,
             name: this.name,
             cpf: this.cpf,
             email: this.email,
             login: this.login,
-            password: this.password,
+            password: await Bcrypt.encript(this.password),
             birth: this.birth
         });
         const result = await user.save();
-        if (!result) return new MutationResult(EActionStatus.error);
+        if (!result) return new MutationResult(EActionStatus.notAllowed);
         return new MutationResult(EActionStatus.success);
     }
 }

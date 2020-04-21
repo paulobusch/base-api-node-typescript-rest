@@ -1,6 +1,8 @@
-import { IViewModel } from "@interfaces/action-view-model.interface";
+import { ViewModel } from "@bases/action-view-model.interface";
 
-export class QueryPaginated<TRestul extends IViewModel> {
-    total: number;
-    rows: TRestul
+export class QueryPaginated<TRestul extends ViewModel<TRestul>> {
+    constructor(
+        public total: number,
+        public rows: TRestul[]
+    ) { }
 }

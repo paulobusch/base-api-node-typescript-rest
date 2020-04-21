@@ -4,6 +4,7 @@ import { Validator } from "@bases/property-validator";
 import { RequiredValidator } from "@validators/required";
 import { EmailValidator } from "@validators/email";
 import { RegexValidator } from "@validators/regex";
+import { RangeOptions, RangeValidator } from "@validators/range";
 
 export class Validators {
 
@@ -17,6 +18,10 @@ export class Validators {
 
     static lenght(options: Shape<LengthOptions>): Validator {
         return new LengthValidator(options);
+    }
+
+    static range(options: Shape<RangeOptions>): Validator {
+        return new RangeValidator(options);
     }
 
     static regex(regex: RegExp): Validator {

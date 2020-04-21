@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "dist",
+    "strictNullChecks": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "target": "ES2020",                          /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017', 'ES2018', 'ES2019', 'ES2020', or 'ESNEXT'. */
@@ -16,6 +17,7 @@
       "@settings": ["settings.json"],
       "@bases/*": ["src/utils/bases/*"],
       "@models/*": ["src/models/*"],
+      "@hashing/*": ["src/utils/hashing/*"],
       "@decorators/*": ["src/utils/decorators/*"],
       "@validators/*": ["src/utils/validators/*"],
       "@metadata/*": ["src/utils/metadata/*"],

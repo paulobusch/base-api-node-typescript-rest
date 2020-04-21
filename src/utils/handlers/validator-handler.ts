@@ -14,8 +14,8 @@ export class ValidatorHandler {
                 if (!valid){
                     const data = { 
                         field: propertyKey,
-                        options: validator.serialize(), 
-                        validator: ValidatorType[validator.type]
+                        validator: ValidatorType[validator.type],
+                        options: validator.serialize()
                     };
                     return new ActionResult(EActionStatus.notAllowed, 'Current action is not valid', data);
                 }

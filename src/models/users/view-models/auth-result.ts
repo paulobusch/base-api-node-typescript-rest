@@ -1,12 +1,7 @@
-import { IViewModel } from '@interfaces/action-view-model.interface';
-import { Shape } from '@metadata/shape-type';
+import { ViewModel } from '@bases/action-view-model.interface';
 
-export class AuthResult implements IViewModel {
+export class AuthResult extends ViewModel<AuthResult> {
     public sucess: boolean;
     public user_name: string;
     public user_email: string;
-
-    constructor(data: Shape<AuthResult>) {
-        Object.assign(this, data);
-    }
 }

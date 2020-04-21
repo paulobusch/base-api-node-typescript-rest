@@ -1,12 +1,7 @@
-import { IViewModel } from "@interfaces/action-view-model.interface";
-import { Shape } from "@metadata/shape-type";
+import { ViewModel } from "@bases/action-view-model.interface";
 
-export class UserDetail implements IViewModel {
+export class UserDetail extends ViewModel<UserDetail> {
     public name: string;
     public email: string;
     public birth: Date;
-
-    constructor(data: Shape<UserDetail>) {
-        Object.assign(this, data);
-    }
 }
