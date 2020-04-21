@@ -3,14 +3,14 @@ import auth from './filters/auth';
 import express from 'express';
 import settings from '@settings';
 import ActionHandler from '@handlers/action-handler';
-import { RestPath } from 'rest';
+import { RestTree } from 'rest-tree-directorty';
 import { ActionContext } from '@bases/action-context';
 import { UrlParser } from '@routers/extract-params';
 declare var __dirname;
 const app = express();
 
-RestPath.setConfig(settings.rest, __dirname);
-for (let router of RestPath.getRouters()) {
+RestTree.setConfig(settings.rest, __dirname);
+for (let router of RestTree.getRouters(__dirname)) {
     app[router.method](router.path, auth, async (request, response) => {
         if (!router.module || !Object.keys(router.module).length) 
             throw new Error('Require implements class');
@@ -26,7 +26,7 @@ for (let router of RestPath.getRouters()) {
     });
 }
 app.get('/', (req, res) => {
-    res.send(RestPath.compile());
+    res.send(RestTree.compile(__dirname));
 });
 
 app.listen(3000, () => { console.log('Runing server on port: 3000'); });
