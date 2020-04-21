@@ -15,6 +15,7 @@
     "paths": {
       "@settings": ["settings.json"],
       "@bases/*": ["src/utils/bases/*"],
+      "@models/*": ["src/models/*"],
       "@decorators/*": ["src/utils/decorators/*"],
       "@validators/*": ["src/utils/validators/*"],
       "@metadata/*": ["src/utils/metadata/*"],

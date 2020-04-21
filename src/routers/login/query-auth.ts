@@ -1,13 +1,12 @@
 import { Query } from "@bases/action-bases";
 import { QueryResult } from "@results/action-result";
-import { AuthResult } from "./view-models/auth-result";
+import { AuthResult } from "../../models/users/view-models/auth-result";
 import { ActionContext } from "@metadata/action-context";
 
 export default class AuthUser extends Query<AuthResult> {
     async execute(context: ActionContext): Promise<QueryResult<AuthResult>> {
         const result = new AuthResult({
             sucess: true,
-            role_name: 'admin',
             user_email: 'paulo@teste.com.br',
             user_name: 'Paulo Ricardo Busch'
         });

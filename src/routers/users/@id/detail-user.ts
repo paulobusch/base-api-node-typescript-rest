@@ -1,4 +1,4 @@
-import { UserDetail } from "./view-models/user-detail";
+import { UserDetail } from "../../../models/users/view-models/user-detail";
 import { Query } from "@bases/action-bases";
 import { ActionContext } from "@metadata/action-context";
 import { QueryResult } from "@results/action-result";

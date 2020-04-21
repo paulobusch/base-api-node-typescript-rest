@@ -14,8 +14,14 @@ export default class ActionHandler {
         if (consistent.status !== EActionStatus.success) return consistent;
         const permitted = action.permitted();
         if (!permitted) return new ActionResult(EActionStatus.unauthorized, 'No has permission to run action');
-        const result = await action.execute(context);
-        await TriggerHandler.runTriggers(action, result);     
+        let result: IActionResult<TResult>;
+        try {
+            result = await action.execute(context);
+        }catch(err) {
+            const actionName = (action as any).constructor.name;
+            return new ActionResult(EActionStatus.error, `Error on run action: ${actionName}`);
+        }        
+        await TriggerHandler.runTriggers(action, result);
         return result;
     }
 }

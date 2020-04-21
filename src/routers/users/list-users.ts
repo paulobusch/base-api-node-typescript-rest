@@ -1,5 +1,5 @@
 import { Query } from "@bases/action-bases";
-import { UserList } from "./view-models/user-list";
+import { UserList } from "../../models/users/view-models/user-list";
 import { QueryResult } from "@results/action-result";
 import { ActionContext } from "@metadata/action-context";
 

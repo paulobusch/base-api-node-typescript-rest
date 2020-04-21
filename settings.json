@@ -1,9 +1,9 @@
 {
     "free-auth": ["login"],
-    "rest": { 
+    "rest": {
         "input": "src\\routers",
         "files": {
-            "get": ["detail", "list"],
+            "get": ["query", "detail", "list"],
             "post": ["create"],
             "put": ["update"],
             "delete": ["delete"]
