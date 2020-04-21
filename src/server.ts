@@ -4,12 +4,12 @@ import express from 'express';
 import settings from '@settings';
 import ActionHandler from '@handlers/action-handler';
 import { RestTree } from 'rest-tree-directorty';
-import { ActionContext } from '@bases/action-context';
+import { ActionContext } from 'src/utils/metadata/action-context';
 import { UrlParser } from '@routers/extract-params';
 declare var __dirname;
 const app = express();
 
-RestTree.setConfig(settings.rest, __dirname);
+RestTree.setConfig(settings.rest);
 for (let router of RestTree.getRouters(__dirname)) {
     app[router.method](router.path, auth, async (request, response) => {
         if (!router.module || !Object.keys(router.module).length) 

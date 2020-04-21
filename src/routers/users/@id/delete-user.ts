@@ -1,6 +1,6 @@
-import { Mutation } from "@bases/action-implements";
+import { Mutation } from "@bases/action-bases";
 import { MutationResult } from "@results/action-result";
-import { ActionContext } from "@bases/action-context";
+import { ActionContext } from "src/utils/metadata/action-context";
 
 export class DeleteUser extends Mutation {
     async consistent(): Promise<MutationResult> {

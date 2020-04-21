@@ -3,7 +3,7 @@ import { IViewModel } from "@interfaces/action-view-model.interface";
 import { QueryPaginated } from "@results/action-paginated";
 import { ETrigger } from "@enums/trigger.enum";
 import { MutationResult, QueryResult } from "@results/action-result";
-import { ActionContext } from "./action-context";
+import { ActionContext } from "../metadata/action-context";
 
 export abstract class Mutation implements IAction<any> {
     async abstract consistent(): Promise<MutationResult>;

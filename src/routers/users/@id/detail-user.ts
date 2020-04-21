@@ -1,6 +1,6 @@
 import { UserDetail } from "./view-models/user-detail";
-import { Query } from "@bases/action-implements";
-import { ActionContext } from "@bases/action-context";
+import { Query } from "@bases/action-bases";
+import { ActionContext } from "src/utils/metadata/action-context";
 import { QueryResult } from "@results/action-result";
 
 export class DetailUser extends Query<UserDetail> {

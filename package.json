@@ -13,6 +13,9 @@
   "_moduleAliases": {
     "@settings": "settings.json",
     "@bases": "src/utils/bases",
+    "@decorators": "src/utils/decorators",
+    "@validators": "src/utils/validators",
+    "@metadata": "src/utils/metadata",
     "@enums": "src/utils/enums",
     "@handlers": "src/utils/handlers",
     "@interfaces": "src/utils/interfaces",
@@ -22,7 +25,7 @@
   "dependencies": {
     "express": "^4.17.1",
     "lodash": "^4.17.15",
-    "rest-tree-directorty": "^1.1.2"
+    "rest-tree-directorty": "^1.1.3"
   },
   "devDependencies": {
     "module-alias": "^2.2.2",

@@ -1,7 +1,7 @@
-import { Query } from "@bases/action-implements";
+import { Query } from "@bases/action-bases";
 import { QueryResult } from "@results/action-result";
 import { AuthResult } from "./view-models/auth-result";
-import { ActionContext } from "@bases/action-context";
+import { ActionContext } from "src/utils/metadata/action-context";
 
 export default class AuthUser extends Query<AuthResult> {
     async execute(context: ActionContext): Promise<QueryResult<AuthResult>> {

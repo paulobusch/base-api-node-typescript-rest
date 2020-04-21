@@ -1,5 +1,5 @@
 import { IViewModel } from "@interfaces/action-view-model.interface";
-import { Shape } from "@bases/shape-type";
+import { Shape } from "src/utils/metadata/shape-type";
 
 export class UserList implements IViewModel {
     public name: string;

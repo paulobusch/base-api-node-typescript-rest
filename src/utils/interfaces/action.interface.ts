@@ -1,6 +1,6 @@
 import { ETrigger } from "@enums/trigger.enum";
 import { IActionResult } from "@interfaces/action-result.interface";
-import { ActionContext } from "@bases/action-context";
+import { ActionContext } from "src/utils/metadata/action-context";
 
 export interface IAction<TResult> {
     consistent(): Promise<IActionResult<TResult>>;

@@ -1,7 +1,7 @@
-import { Query } from "@bases/action-implements";
+import { Query } from "@bases/action-bases";
 import { UserList } from "./view-models/user-list";
 import { QueryResult } from "@results/action-result";
-import { ActionContext } from "@bases/action-context";
+import { ActionContext } from "src/utils/metadata/action-context";
 
 export class ListUsers extends Query<UserList[]> {
     async execute(context: ActionContext): Promise<QueryResult<UserList[]>> {
