@@ -1,5 +1,5 @@
 import { Shape } from "@metadata/shape-type";
-import { LengthOptions, LengthValidator } from "@validators/lenght";
+import { LengthOptions, LengthValidator } from "@validators/length";
 import { Validator } from "@bases/property-validator";
 import { RequiredValidator } from "@validators/required";
 import { EmailValidator } from "@validators/email";

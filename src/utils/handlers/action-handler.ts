@@ -4,15 +4,11 @@ import { TriggerHandler } from "./trigger-handler";
 import { IActionResult } from "@interfaces/action-result.interface";
 import { ActionResult } from "@results/action-result";
 import { ActionContext } from "@metadata/action-context";
+import { ValidatorHandler } from "./validator-handler";
 
 export default class ActionHandler {
-    private static validate<TResult>(action: IAction<TResult>): IActionResult<TResult> {
-        if (false) return new ActionResult(EActionStatus.notAllowed, 'The action is not valid', {  } as TResult);
-        return new ActionResult(EActionStatus.success);
-    }
-    
     public static async run<TResult>(action: IAction<TResult>, context: ActionContext): Promise<IActionResult<TResult>> {
-        const validateResult = ActionHandler.validate(action);
+        const validateResult = ValidatorHandler.validate(action);
         if (validateResult.status !== EActionStatus.success) return validateResult;
         const consistent = await action.consistent();
         if (consistent.status !== EActionStatus.success) return consistent;

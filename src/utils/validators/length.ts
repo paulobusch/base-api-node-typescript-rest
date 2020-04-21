@@ -13,13 +13,11 @@ export class LengthOptions {
 }
 
 export class LengthValidator extends Validator {
-    public options: LengthOptions;
-
     constructor(options: LengthOptions) {
-        super(ValidatorType.lenght);
+        super(ValidatorType.length);
         this.options = options;
         if (!this.options || (!this.options.length && !this.options.min && !this.options.max)) 
-            throw new Error('Require configure lenght options');
+            throw new Error('Require configure length options');
     }
 
     public validate(value: any): boolean {
