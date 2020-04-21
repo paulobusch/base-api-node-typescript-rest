@@ -18,12 +18,11 @@ export class LengthValidator extends Validator {
     constructor(options: LengthOptions) {
         super(ValidatorType.lenght);
         this.options = options;
+        if (!this.options || (!this.options.length && !this.options.min && !this.options.max)) 
+            throw new Error('Require configure lenght options');
     }
 
     public validate(value: any): boolean {
-        if (!this.options || (!this.options.length && !this.options.min && !this.options.max)) 
-            throw new Error('Require configure lenght options');
-            
         const { length, min, max } = this.options;
         if (!value) return false;
         if (length && value.length !== length) return false;

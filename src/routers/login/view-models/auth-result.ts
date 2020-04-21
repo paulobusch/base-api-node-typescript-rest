@@ -1,5 +1,5 @@
 import { IViewModel } from '@interfaces/action-view-model.interface';
-import { Shape } from 'src/utils/metadata/shape-type';
+import { Shape } from '@metadata/shape-type';
 
 export class AuthResult implements IViewModel {
     public sucess: boolean;

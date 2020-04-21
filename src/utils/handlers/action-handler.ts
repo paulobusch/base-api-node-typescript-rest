@@ -3,7 +3,7 @@ import { EActionStatus } from "@enums/action-status.enum";
 import { TriggerHandler } from "./trigger-handler";
 import { IActionResult } from "@interfaces/action-result.interface";
 import { ActionResult } from "@results/action-result";
-import { ActionContext } from "src/utils/metadata/action-context";
+import { ActionContext } from "@metadata/action-context";
 
 export default class ActionHandler {
     private static validate<TResult>(action: IAction<TResult>): IActionResult<TResult> {

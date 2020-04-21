@@ -4,7 +4,7 @@ import express from 'express';
 import settings from '@settings';
 import ActionHandler from '@handlers/action-handler';
 import { RestTree } from 'rest-tree-directorty';
-import { ActionContext } from 'src/utils/metadata/action-context';
+import { ActionContext } from '@metadata/action-context';
 import { UrlParser } from '@routers/extract-params';
 declare var __dirname;
 const app = express();
