@@ -22,7 +22,7 @@ export class RangeValidator extends Validator {
     public validate(value: any): boolean {
         if (typeof value !== 'number') throw new Error('Value is not number');
         const { min, max } = this.options;
-        if (min && value < min) { console.log('min'); return false; }
+        if (min && value < min) return false;
         if (max && value > max) return false;
         return true;
     }

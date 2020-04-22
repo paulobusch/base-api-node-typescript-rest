@@ -6,7 +6,7 @@ import { ActionContext } from "@metadata/action-context";
 export default class AuthUser extends Query<AuthResult> {
     async execute(context: ActionContext): Promise<QueryResult<AuthResult>> {
         const result = new AuthResult({
-            sucess: true,
+            success: true,
             user_email: 'paulo@teste.com.br',
             user_name: 'Paulo Ricardo Busch'
         });

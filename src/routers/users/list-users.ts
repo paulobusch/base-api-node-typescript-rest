@@ -7,6 +7,7 @@ import { QueryPaginated } from "@results/action-paginated";
 import { Property } from "@decorators/property";
 import { Validators } from "@metadata/validators";
 import { Op } from "sequelize";
+import { DecoratorAttribute } from "@decorators/attribute";
 
 export class ListUsers extends Query<QueryPaginated<UserList>> {
     
@@ -19,9 +20,10 @@ export class ListUsers extends Query<QueryPaginated<UserList>> {
     public search: string;
 
     async execute(context: ActionContext): Promise<QueryResult<QueryPaginated<UserList>>> {
+        const attributes = DecoratorAttribute.getAttributes(UserList);
         const query = {
             raw: true,
-            attributes: ['name', 'email'],
+            attributes,
             where: { },
             limit: this.limit,
             offset: this.page * this.limit

@@ -5,6 +5,7 @@ import { Validators } from "@metadata/validators";
 import { Property } from "@decorators/property";
 import { User } from "@models/users/user";
 import { EActionStatus } from "@enums/action-status.enum";
+import { Op } from 'sequelize';
 
 export class UpdateUser extends Mutation {
     @Property([Validators.lenght({ length: 8 })])
@@ -29,11 +30,11 @@ export class UpdateUser extends Mutation {
     public birth: Date;
     
     async consistent(): Promise<MutationResult> {
-        const existsName = !!await User.findOne({ where: { name: this.name } });
+        const existsName = !!await User.findOne({ where: { name: this.name, id: { [Op.not]: this.id } } });
         if (existsName) return new MutationResult(EActionStatus.notAllowed, 'User with name already exists');
-        const existsEmail = !!await User.findOne({ where: { email: this.email } });
+        const existsEmail = !!await User.findOne({ where: { email: this.email, id: { [Op.not]: this.id } } });
         if (existsEmail) return new MutationResult(EActionStatus.notAllowed, 'User with email already exists');
-        const existsLogin = !!await User.findOne({ where: { login: this.login } });
+        const existsLogin = !!await User.findOne({ where: { login: this.login, id: { [Op.not]: this.id } } });
         if (existsLogin) return new MutationResult(EActionStatus.notAllowed, 'User with login already exists');
         return new MutationResult(EActionStatus.success);
     }

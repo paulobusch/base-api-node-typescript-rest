@@ -33,7 +33,7 @@ export class MutationResult implements IActionResult<any> {
     }
 }
 
-export class QueryResult<TResult extends ViewModel<TResult> | QueryPaginated<TResult>> implements IActionResult<TResult>  {
+export class QueryResult<TResult extends ViewModel<TResult> | QueryPaginated<ViewModel<TResult>>> implements IActionResult<TResult>  {
     constructor(
         public data: TResult, 
         public status = EActionStatus.success,

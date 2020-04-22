@@ -11,7 +11,7 @@ export function Property(validators: Validator[]) {
     }
 }
 
-export class Decorator {
+export class DecoratorProperty {
     static getPropertyData(action: any, propertyKey: string): PropertyData {
         const actionName = action.constructor.name;
         if (!actionsData[actionName]) return { } as PropertyData;
