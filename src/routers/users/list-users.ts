@@ -2,7 +2,7 @@ import { Query } from "@bases/action-bases";
 import { UserList } from "../../models/users/view-models/user-list";
 import { QueryResult } from "@results/action-result";
 import { ActionContext } from "@metadata/action-context";
-import { User } from "@models/users/user";
+import { User } from "@models/users/entities/user";
 import { QueryPaginated } from "@results/action-paginated";
 import { Property } from "@decorators/property";
 import { Validators } from "@metadata/validators";
@@ -10,11 +10,10 @@ import { Op } from "sequelize";
 import { DecoratorAttribute } from "@decorators/attribute";
 
 export class ListUsers extends Query<QueryPaginated<UserList>> {
-    
     @Property([Validators.range({ min: 0 })])
     public page: number = 0;
     
-    @Property([Validators.range({ min: 0, max: 100 })])
+    @Property([Validators.range({ min: 1, max: 100 })])
     public limit: number = 100;
     
     public search: string;

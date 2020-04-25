@@ -3,7 +3,7 @@ import { MutationResult } from "@results/action-result";
 import { ActionContext } from "@metadata/action-context";
 import { Validators } from "@metadata/validators";
 import { Property } from "@decorators/property";
-import { User } from "@models/users/user";
+import { User } from "@models/users/entities/user";
 import { EActionStatus } from "@enums/action-status.enum";
 
 export class DeleteUser extends Mutation {

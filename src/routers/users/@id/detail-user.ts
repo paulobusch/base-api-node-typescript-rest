@@ -5,7 +5,7 @@ import { QueryResult } from "@results/action-result";
 import { Property } from "@decorators/property";
 import { Validators } from "@metadata/validators";
 import { EActionStatus } from "@enums/action-status.enum";
-import { User } from "@models/users/user";
+import { User } from "@models/users/entities/user";
 import { DecoratorAttribute } from "@decorators/attribute";
 
 export class DetailUser extends Query<UserDetail> {
@@ -15,12 +15,11 @@ export class DetailUser extends Query<UserDetail> {
     async execute(context: ActionContext): Promise<QueryResult<UserDetail>> {
         const attributes = DecoratorAttribute.getAttributes(UserDetail);
         const query = { 
-            raw: true, 
             attributes, 
             where: { id: this.id } 
         };
         const user = await User.findOne(query);
         if (!user) return new QueryResult({ } as any, EActionStatus.notFound);
-        return new QueryResult(new UserDetail(user as any));
+        return new QueryResult(new UserDetail(user.get({ plain: true }) as any));
     }
 }

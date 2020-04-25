@@ -16,7 +16,7 @@ const app = express();
 app.use(express.json()) 
 app.use(cors())
 
-Db.sync({ logging: false }).then(() => {
+Db.sync({ logging: true, force: false }).then(() => {
     console.log('Database Synchronized');
 });
 
@@ -30,7 +30,7 @@ for (let router of RestTree.getRouters(__dirname)) {
         Object.assign(action, UrlParser.getQueryParams(request.url));
         Object.assign(action, UrlParser.getDataParams(request.url, router.path));
         Object.assign(action, request.body);
-        const context = new ActionContext({ request, response });
+        const context = new ActionContext({ request, response, db: Db });
         const result = await ActionHandler.run(action, context);
         response.status(result.status);
         response.json(result.serialize());

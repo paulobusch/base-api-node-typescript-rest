@@ -1,5 +1,9 @@
 import {Sequelize} from 'sequelize-typescript';
-import { User } from '@models/users/user';
+import { User } from '@models/users/entities/user';
+import { RoleFunctionality } from '@models/roles/entities/role-functionality';
+import { Functionality } from '@models/roles/entities/functionality';
+import { Feature } from '@models/roles/entities/feature';
+import { Role } from '@models/roles/entities/role';
  
 const Db =  new Sequelize({
         host: process.env.DB_HOST,
@@ -7,7 +11,7 @@ const Db =  new Sequelize({
         username: process.env.DB_USER,
         password: process.env.DB_PASS,
         dialect: 'mysql',
-        models: [User]
+        models: [User, Role, RoleFunctionality, Functionality, Feature]
 });
 
 export { Db };

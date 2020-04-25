@@ -3,7 +3,7 @@ import { MutationResult } from "@results/action-result";
 import { ActionContext } from "@metadata/action-context";
 import { Validators } from "@metadata/validators";
 import { Property } from "@decorators/property";
-import { User } from "@models/users/user";
+import { User } from "@models/users/entities/user";
 import { EActionStatus } from "@enums/action-status.enum";
 import { Op } from 'sequelize';
 
@@ -28,6 +28,9 @@ export class UpdateUser extends Mutation {
     
     @Property([Validators.required])
     public birth: Date;
+
+    @Property([Validators.required, Validators.lenght({ length: 8 })])
+    public id_role: string;
     
     async consistent(): Promise<MutationResult> {
         const existsName = !!await User.findOne({ where: { name: this.name, id: { [Op.not]: this.id } } });
