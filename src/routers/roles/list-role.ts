@@ -5,10 +5,10 @@ import { QueryResult } from "@results/action-result";
 import { Property } from "@decorators/property";
 import { Validators } from "@metadata/validators";
 import { Op, Sequelize } from "sequelize";
-import { ActionModel } from "@bases/action-model";
 import { Role } from "@models/roles/entities/role";
 import { QueryPaginated } from "@results/action-paginated";
 import { User } from "@models/users/entities/user";
+import * as _ from 'lodash';
 
 export class ListRole extends Query<QueryPaginated<RoleList>> {
     @Property([Validators.range({ min: 0 })])
@@ -33,16 +33,9 @@ export class ListRole extends Query<QueryPaginated<RoleList>> {
         } as any;
 
         if (this.search) query.where.name = { [Op.like]: `${this.search}%` };
-        const result = await Role.findAndCountAll(query) as any;
-        const roles = ActionModel.getList<any>(result.rows);
-        const vmRoles = roles.map(r => 
-            new RoleList({
-                id: r.id,
-                name: r.name,
-                users_count: r.users_count
-            })    
-        );
-
-        return new QueryResult(new QueryPaginated(result.count[0].count, vmRoles))
+        const result = await Role.findAndCountAll(query);
+        const roles = result.rows.map(r => RoleList.map(r));
+        const total = _.sum((result.count as any).map(t => t.count));
+        return new QueryResult(new QueryPaginated(total, roles));
     }
 }

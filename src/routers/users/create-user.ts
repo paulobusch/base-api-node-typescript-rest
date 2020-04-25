@@ -44,7 +44,7 @@ export class CreateUser extends Mutation {
     }
     async execute(context: ActionContext): Promise<MutationResult> {
         const user = new User(this);
-        user.password = await Bcrypt.encript(this);
+        user.password = await Bcrypt.encript(this.password);
         const result = await user.save();
         if (!result) return new MutationResult(EActionStatus.notAllowed);
         return new MutationResult(EActionStatus.success);

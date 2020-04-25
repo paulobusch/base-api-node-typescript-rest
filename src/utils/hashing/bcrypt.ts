@@ -10,6 +10,6 @@ export class Bcrypt {
     }
 
     public static async encript(pass): Promise<string> {
-        return await bcrypt.hash(Bcrypt.concatPass(pass), 23);
+        return await bcrypt.hash(Bcrypt.concatPass(pass), 8);
     }
 }

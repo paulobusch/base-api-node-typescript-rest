@@ -23,9 +23,6 @@ export class UpdateUser extends Mutation {
     @Property([Validators.required, Validators.lenght({ min: 5, max: 50 })])
     public login: string;
     
-    @Property([Validators.required, Validators.lenght({ min: 5, max: 50 })])
-    public password: string;
-    
     @Property([Validators.required])
     public birth: Date;
 
@@ -43,15 +40,10 @@ export class UpdateUser extends Mutation {
     }
     async execute(context: ActionContext): Promise<MutationResult> {
         const query = { where: { id: this.id } }; 
-        const user = new User({ 
-            id: this.id,
-            name: this.name,
-            cpf: this.cpf,
-            email: this.email,
-            login: this.login,
-            birth: this.birth
-        });
-        const result = await user.update(query);
+        const user = await User.findOne(query);
+        if (!user) return new MutationResult(EActionStatus.notFound);
+        user.set(this);
+        const result = await user.save();
         if (!result) return new MutationResult(EActionStatus.notAllowed);
         return new MutationResult(EActionStatus.success);
     }

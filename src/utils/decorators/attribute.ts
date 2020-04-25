@@ -10,7 +10,9 @@ const Attribute = function(name?: string): Function {
 
 export class DecoratorAttribute {
     static getAttributes(type: any): string[] {
-        const modelName = type.prototype.constructor.name;
+        const modelName = type.prototype 
+            ? type.prototype.constructor.name 
+            : type.constructor.name;
         return modelsData[modelName];
     }
 }

@@ -21,7 +21,6 @@ export class ListUsers extends Query<QueryPaginated<UserList>> {
     async execute(context: ActionContext): Promise<QueryResult<QueryPaginated<UserList>>> {
         const attributes = DecoratorAttribute.getAttributes(UserList);
         const query = {
-            raw: true,
             attributes,
             where: { },
             limit: this.limit,
@@ -38,7 +37,7 @@ export class ListUsers extends Query<QueryPaginated<UserList>> {
         }
 
         const users = await User.findAndCountAll(query);
-        const vmUsers = users.rows.map(u => new UserList(u));
+        const vmUsers = users.rows.map(u => UserList.map(u));
         return new QueryResult(new QueryPaginated(users.count, vmUsers));
     }
 }

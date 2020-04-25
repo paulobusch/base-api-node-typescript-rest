@@ -8,9 +8,6 @@ import { RoleDetail } from "@models/roles/view-models/role-detail";
 import { Functionality } from "@models/roles/entities/functionality";
 import { Role } from "@models/roles/entities/role";
 import { EActionStatus } from "@enums/action-status.enum";
-import { Converter } from "@metadata/converter";
-import { EFunctionality } from "@models/roles/enums/functionalities";
-import { ActionModel } from "@bases/action-model";
 
 export class DetailRole extends Query<RoleDetail> {
     @Property([Validators.lenght({ length: 8 })])
@@ -26,13 +23,8 @@ export class DetailRole extends Query<RoleDetail> {
                 through: { attributes: [] }
             }]
         };
-        const role = ActionModel.getOne<Role>(await Role.findOne(query));
+        const role = await Role.findOne(query);
         if (!role) return new QueryResult({} as any, EActionStatus.notFound);
-        const vmRole = new RoleDetail({
-            id: role.id,
-            name: role.name,
-            functionalities: role.functionalities.map(m => m.id as EFunctionality)
-        });
-        return new QueryResult(vmRole);
+        return new QueryResult(RoleDetail.map(role));
     }
 }

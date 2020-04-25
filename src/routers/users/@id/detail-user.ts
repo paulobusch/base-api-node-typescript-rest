@@ -20,6 +20,6 @@ export class DetailUser extends Query<UserDetail> {
         };
         const user = await User.findOne(query);
         if (!user) return new QueryResult({ } as any, EActionStatus.notFound);
-        return new QueryResult(new UserDetail(user.get({ plain: true }) as any));
+        return new QueryResult(UserDetail.map(user));
     }
 }
